@@ -1,0 +1,112 @@
+<div class="collapse">
+    <div class="collapse__select_role">
+        <div class="select">Гражданам</div>
+    </div>
+    <div class="collapse__navigations">
+        <div class="navigation">Услуги</div>
+        <a <% if (!logined_user) { %> id="open_collapse_login" onclick="login_button()" <% } else { %> href="/documnets" <% } %>><div class="navigation">Документы</div></a>
+        <a <% if (!logined_user) { %> id="open_collapse_login" onclick="login_button()" <% } else { %> href="/statements" <% } %>><div class="navigation">Заявления</div></a>
+        <div class="navigation">Платежи</div>
+        <a href="support"><div class="navigation">Помощь</div></a>
+    </div>
+    <div class="collapse__search"><img src="icons/search.svg" alt=""></div>
+</div>
+<nav class="navbar">
+    <div class="nav__center_content">
+        <div class="left">
+            <div class="drop_button" onclick="collapse()"><span class="icon"></span></div>
+            <a href="/"><div class="nav__logo">ЛОЛОУСЛУГИ</div></a>
+            <div class="nav__select_role">
+                <div class="select">Гражданам</div>
+            </div>
+        </div>
+        <div class="right">
+            <div class="nav__navigations">
+                <div class="navigation">Услуги</div>
+                <a <% if (!logined_user) { %> id="open_collapse_login" onclick="login_button()" <% } else { %> href="/documents" <% } %>><div class="navigation">Документы</div></a>
+                <a <% if (!logined_user) { %> id="open_collapse_login" onclick="login_button()" <% } else { %> href="/statements" <% } %>><div class="navigation">Заявления</div></a>
+                <div class="navigation">Платежи</div>
+                <a href="support"><div class="navigation">Помощь</div></a>
+            </div>
+            <div class="search"><img src="icons/search.svg" alt=""></div>
+            <% if (!logined_user) { %>
+                <div class="login" id="open_collapse_login" onclick="login_button()">Войти</div>
+            <% } else { %>
+                <div class="user">
+                    <img src="<%= logined_user.img %>" alt="">
+                </div>
+                <div class="user_collapse">
+                    <a class="but" id="logout" style="color: rgb(255, 75, 75);">Выйти</a>
+                </div>
+            <% } %>
+        </div>
+    </div>
+</nav>
+
+<div class="overflow" <% if (error) { %> style="display: flex; opacity: 1;" <% } %>>
+    <div class="collaps">
+        <div class="login_form" id="login" <% if (error && kind == 'login') { %> style="left: 0;" <% } %>>
+            <div class="loader"></div>
+            <form method="post" action="login">
+                <div class="title">
+                    <h1>Вход</h1>
+                </div>
+                <div class="inputs">
+                    <input type="text" name="login" <% if (error && kind == 'login' && input == 'login') { %> placeholder="<%= error %>" class="error" <% } else { %> placeholder="Логин" <% } %> value="<%= values ? values.login || '' : '' %>">
+                    <input type="password" name="password" <% if (error && kind == 'login' && input == 'password') { %> placeholder="<%= error %>" class="error" <% } else { %> placeholder="Пароль" <% } %>>
+                </div>
+                <div class="checks">
+                    <div class="check">
+                        <input name="personal" type="checkbox" name="personal">
+                        <label for="personal">Я даю соглашение на обработку Персональных данных</label>
+                    </div>
+                    <div class="check">
+                        <input name="terms" type="checkbox" name="terms">
+                        <label for="terms">Я согласен с офертой сайта, а также с условиями использования</label>
+                    </div>
+                    <% if (error && kind == 'login' && input == 'personal & terms') { %> <p style="color: rgb(255, 90, 90); margin-top: 10px;"><%= error %></p> <% } else { %><% } %>
+                </div>
+                <div class="buttons">
+                    <div class="button" id="login_submit">Войти</div>
+                    <div class="button" id="register">Зарегистрироваться</div>
+                </div>
+                <div class="close"></div>
+            </form>
+        </div>
+        <div class="login_form register" id="register_form" <% if (error && kind == 'register') { %> style="left: 0;" <% } %>>
+            <div class="loader reg"></div>
+            <form method="post" action="register">
+                <div class="title">
+                    <h1>Регистрация</h1>
+                </div>
+                <div class="inputs">
+                    <input type="text" name="login" <% if (error && kind == 'register' && input == 'login') { %> placeholder="<%= error %>" class="error" <% } else { %> placeholder="Логин" <% } %> value="<%= values ? values.login || '' : '' %>">
+                    <input type="email" name="email" <% if (error && kind == 'register' && input == 'email') { %> placeholder="<%= error %>" class="error" <% } else { %> placeholder="Адрес электронной почты" <% } %> value="<%= values ? values.email || '' : '' %>">
+                    <input type="password" name="password" <% if (error && kind == 'register' && input == 'password') { %> placeholder="<%= error %>" class="error" <% } else { %> placeholder="Пароль" <% } %> value="<%= values ? values.password || '' : '' %>">
+                    <input type="password" name="rePassword" <% if (error && kind == 'register' && input == 'rePassword') { %> placeholder="<%= error %>" class="error" <% } else { %> placeholder="Повтор пароля" <% } %>>
+                    <input type="text" name="ref" placeholder="Реферальный код" value="<%= values ? values.ref || '' : '' %>">
+                </div>
+                <div class="checks">
+                    <div class="check">
+                        <input name="personal" type="checkbox" name="personal">
+                        <label for="personal">Я даю соглашение на обработку Персональных данных</label>
+                    </div>
+                    <div class="check">
+                        <input name="terms" type="checkbox" name="terms">
+                        <label for="terms">Я согласен с офертой сайта, а также с условиями использования</label>
+                    </div>
+                    <% if (error && kind == 'register' && input == 'personal & terms') { %> <p style="color: rgb(255, 90, 90); margin-top: 10px;"><%= error %></p> <% } else { %><% } %>
+                </div>
+                <div class="buttons">
+                    <div class="button" id="register_submit"<% if (error && kind == 'register' && input == 'personal & terms') { %> style="margin-top: -10px;"> <% } else { %><% } %>>Зарегистрироваться</div>
+                </div>
+                <div class="back"><svg xmlns="http://www.w3.org/2000/svg" fill="#fff" width="28px" height="28px" viewBox="0 0 1024 1024"><path d="M222.927 580.115l301.354 328.512c24.354 28.708 20.825 71.724-7.883 96.078s-71.724 20.825-96.078-7.883L19.576 559.963a67.846 67.846 0 01-13.784-20.022 68.03 68.03 0 01-5.977-29.488l.001-.063a68.343 68.343 0 017.265-29.134 68.28 68.28 0 011.384-2.6 67.59 67.59 0 0110.102-13.687L429.966 21.113c25.592-27.611 68.721-29.247 96.331-3.656s29.247 68.721 3.656 96.331L224.088 443.784h730.46c37.647 0 68.166 30.519 68.166 68.166s-30.519 68.166-68.166 68.166H222.927z"/></svg></div>
+                <div class="close"></div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="/js/header.js"></script>
