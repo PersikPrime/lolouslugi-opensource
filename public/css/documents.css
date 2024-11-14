@@ -1,0 +1,134 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    height: 100vh;
+}
+
+body {
+    background-color: #1b1d25;
+    font-family: "Montserrat", sans-serif;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.wrapped {
+    flex: 1 1 auto;
+    height: 100vh;
+    padding-bottom: 10px;
+}
+
+.main {
+    margin-top: 165px;
+    width: 100%;
+    height: calc(100vh - 165px);
+    display: flex;
+    justify-content: center;
+}
+.main__conteiner {
+    max-width: 1216px;
+    color: white;
+    padding: 0 20px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.main__conteiner h1{
+    font-weight: 400;
+    font-size: 36px;
+    margin-bottom: 100px;
+}
+.content{
+    display: flex;
+    justify-content: space-between;
+}
+
+.menu ul{
+    list-style-type: none;
+}
+.menu ul li{
+    font-size: 20px;
+    margin-bottom: 25px;
+    cursor: pointer;
+}
+.menu ul li.active{
+    color: #B5B4FF;
+}
+.blocks{
+    display: flex;
+    flex-wrap: wrap;
+}
+.block{
+    width: calc(404px - 30px);
+    height: fit-content;
+    padding: 25px 15px 25px 15px;
+    background-color: #343745;
+    border-radius: 15px;
+}
+.block .title h3{
+    font-weight: 400;
+    position: relative;
+    width: fit-content;
+    font-size: 20px;
+}
+.block .title h3::after{
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #fff;
+}
+.block .id{
+    font-size: 20px;
+    margin-top: 25px;
+}
+.block .infoFild{
+    margin-top: 25px;
+}
+.block .infoFild .placeholder{
+    font-size: 14px;
+    color: #929292;
+}
+.block .infoFild .value{
+    font-size: 16px;
+}
+.block.person{
+    margin-right: 40px;
+}
+
+@media screen and (max-width: 1076px) {
+    .blocks{
+        justify-content: center;
+    }
+    .block.person{
+        margin-right: 0px;
+        margin-bottom: 30px;
+    }
+}
+@media screen and (max-width: 650px) {
+    .content{
+        flex-direction: column;
+        justify-content: center;
+    }
+    ul{
+        text-align: center;
+    }
+    h1{
+        text-align: center;
+    }
+}
+@media screen and (max-width: 450px) {
+    h1{
+        font-size: 30px !important;
+    }
+    .block{
+        width: 100%;
+    }
+}
