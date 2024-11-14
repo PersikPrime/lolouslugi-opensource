@@ -10,7 +10,7 @@ const bcrypt = require('bcrypt');
 const crypto = require('crypto');
 const saltRounds = 10;
 
-const SECRET_KEY = "3$E>2:Fz.,Q$w4r}FT,a8;+g1.r5;(15H>b3UM,55fz<}iiVIfDe0Z@K,Y_Zxi%G";
+const SECRET_KEY = "ВАШ ТОКЕН";
 
 app.set('view engine', 'ejs');
 app.use(ex.static('public'));
